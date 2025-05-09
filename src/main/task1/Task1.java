@@ -1,21 +1,21 @@
-import java.util.Scanner;
 
 public class Task1 {
     public static void main(String[] args) {
-        System.out.println("Введите значения n и m через пробел и нажмите Enter:");
-        Scanner scanner = new Scanner(System.in);
-        String input = scanner.nextLine();
-        String[] parts = input.split(" ");
 
-
-        if (parts.length < 2) {
-            System.out.println("Ошибка: нужно ввести два числа через пробел!");
-            return;
+        if (args.length < 2) {
+            System.err.println("Использование: java (путь) Task1.java <n> <m>");
+            System.err.println("Пример: java (путь) Task1.java 5 3");
+            System.exit(1);
         }
 
         try {
-            int n = Integer.parseInt(parts[0]);
-            int m = Integer.parseInt(parts[1]);
+            int n = Integer.parseInt(args[0]);
+            int m = Integer.parseInt(args[1]);
+
+            if (n <= 0 || m <= 0) {
+                System.err.println("Ошибка: n и m должны быть положительными числами!");
+                System.exit(2);
+            }
 
             StringBuilder path = new StringBuilder();
             int current = 1;
@@ -31,9 +31,8 @@ public class Task1 {
             System.out.println("Результат: " + path);
 
         } catch (NumberFormatException e) {
-            System.out.println("Ошибка: введите числа, а не текст!");
-        } finally {
-            scanner.close();
+            System.err.println("Ошибка: аргументы должны быть целыми числами!");
+            System.exit(3);
         }
     }
 }
